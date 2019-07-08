@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import {Link} from 'react-router-dom';
+// import axios from 'axios';
 
 class EmployeesPanel extends Component {
     constructor(props) {
@@ -13,7 +14,6 @@ class EmployeesPanel extends Component {
         fetch("https://aqueous-fortress-71879.herokuapp.com/employees")
             .then(res => res.json())
             .then(returnedData => {
-                console.log(returnedData);
                 this.setState({
                     employees: returnedData
                 });
@@ -43,7 +43,7 @@ class EmployeesPanel extends Component {
                             </tbody>
                         </table>
                     </div>
-                    <a href="/teams" className="btn btn-primary form-control">View All Team Data</a>
+                    <Link to="/employees" className="btn btn-primary form-control">View All Employee Data</Link>
                 </div>
             </div>
         )

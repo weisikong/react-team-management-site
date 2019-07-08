@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import {Link} from 'react-router-dom';
+// import axios from 'axios';
 
 class TeamsPanel extends Component {
     constructor(props) {
@@ -8,7 +9,6 @@ class TeamsPanel extends Component {
             teams: []
         };
     }
-
     componentDidMount() {
         fetch("https://aqueous-fortress-71879.herokuapp.com/teams-raw")
             .then(res => res.json())
@@ -20,7 +20,6 @@ class TeamsPanel extends Component {
                 console.log(err);
             });
     }
-
     render() {
         return (
             <div className="panel panel-default">
@@ -42,7 +41,7 @@ class TeamsPanel extends Component {
                             </tbody>
                         </table>
                     </div>
-                    <a href="/teams" className="btn btn-primary form-control">View All Team Data</a>
+                    <Link to="/teams" className="btn btn-primary form-control">View All Team Data</Link>
                 </div>
             </div>
         )
