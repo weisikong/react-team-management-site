@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-// import axios from 'axios';
+import axios from 'axios';
 
 class EmployeesPanel extends Component {
     constructor(props) {
@@ -11,13 +11,13 @@ class EmployeesPanel extends Component {
     }
 
     componentDidMount() {
-        fetch("https://aqueous-fortress-71879.herokuapp.com/employees")
-            .then(res => res.json())
-            .then(returnedData => {
+        axios.get('https://aqueous-fortress-71879.herokuapp.com/employees')
+            .then(res => {
                 this.setState({
-                    employees: returnedData
+                    employees: res.data
                 });
-            }).catch(err => {
+            })
+            .catch(err => {
                 console.log(err);
             });
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import moment from 'moment';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class ProjectsPanel extends Component {
     constructor(props) {
@@ -11,15 +11,15 @@ class ProjectsPanel extends Component {
         };
     }
     componentDidMount() {
-        fetch("https://aqueous-fortress-71879.herokuapp.com/projects")
-        .then(res => res.json())
-        .then(returnedData => {
-            this.setState({
-                projects: returnedData
+        axios.get('https://aqueous-fortress-71879.herokuapp.com/projects')
+            .then(res => {
+                this.setState({
+                    projects: res.data
+                });
+            })
+            .catch(err => {
+                console.log(err);
             });
-        }).catch(err => {
-            console.log(err);
-        });
     }
     render() {
         return (
@@ -37,11 +37,11 @@ class ProjectsPanel extends Component {
                                         var projectDate = moment(project.ProjectStartDate);
                                         var diff = now.diff(projectDate, 'days');
                                         return (
-                                                <tr key={i} >
-                                                    <td>{project.ProjectName}</td>
-                                                    <td>Active {diff} Days</td>
-                                                </tr>
-                                        )                                        
+                                            <tr key={i} >
+                                                <td>{project.ProjectName}</td>
+                                                <td>Active {diff} Days</td>
+                                            </tr>
+                                        )
                                     })}
                                 </tbody>
                             </table>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MainContainer from './MainContainer';
-// import axios from 'axios';
+import axios from 'axios';
 import moment from 'moment';
 
 class Employees extends Component {
@@ -10,15 +10,14 @@ class Employees extends Component {
             employees: []
         };
     }
-
     componentDidMount() {
-        fetch("https://aqueous-fortress-71879.herokuapp.com/employees")
-            .then(res => res.json())
-            .then(returnedData => {
+        axios.get('https://aqueous-fortress-71879.herokuapp.com/employees')
+            .then(res => {
                 this.setState({
-                    employees: returnedData
+                    employees: res.data
                 });
-            }).catch(err => {
+            })
+            .catch(err => {
                 console.log(err);
             });
     }

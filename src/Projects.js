@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MainContainer from './MainContainer';
-// import axios from 'axios';
+import axios from 'axios';
 import moment from 'moment';
 
 class Projects extends Component {
@@ -10,15 +10,14 @@ class Projects extends Component {
             projects: []
         };
     }
-
     componentDidMount() {
-        fetch("https://aqueous-fortress-71879.herokuapp.com/projects")
-            .then(res => res.json())
-            .then(returnedData => {
+        axios.get('https://aqueous-fortress-71879.herokuapp.com/projects')
+            .then(res => {
                 this.setState({
-                    projects: returnedData
+                    projects: res.data
                 });
-            }).catch(err => {
+            })
+            .catch(err => {
                 console.log(err);
             });
     }
@@ -42,7 +41,7 @@ class Projects extends Component {
                                     <td>{project.ProjectName}</td>
                                     <td>{project.ProjectDescription}</td>
                                     <td>{moment(project.ProjectStartDate).format("LL")}</td>
-                                    <td>{moment(project.ProjectEndDate).isValid()?moment(project.ProjectEndDate).format("LL"):'N/A'}</td>
+                                    <td>{moment(project.ProjectEndDate).isValid() ? moment(project.ProjectEndDate).format("LL") : 'N/A'}</td>
                                 </tr>
                             )
                         })}
